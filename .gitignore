@@ -33,5 +33,9 @@ manual_tfjs_converter.py
 *.jpg
 *.jpeg
 
+# Node modules (too large for GitHub)
+node_modules/
+package-lock.json
+
 # Keep docs assets
 !docs/**

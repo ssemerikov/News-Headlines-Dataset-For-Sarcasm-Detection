@@ -76,7 +76,7 @@ async function loadModels() {
         updateLoadingStatus(`Loading ${modelName.toUpperCase()} model...`, progress);
 
         loadPromises.push(
-            tf.loadGraphModel(`models/${modelName}/model.json`)
+            tf.loadLayersModel(`models/${modelName}/model.json`)
                 .then(model => {
                     app.models[modelName] = model;
                     console.log(`✓ Loaded ${modelName} model`);
