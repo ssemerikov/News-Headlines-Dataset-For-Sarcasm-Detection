@@ -4,7 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a sarcasm detection project using the News Headlines Dataset. The dataset contains 28,619 headlines from TheOnion (sarcastic) and HuffPost (non-sarcastic). The implementation compares three RNN architectures: SimpleRNN, LSTM, and BiLSTM for binary sarcasm classification.
+This is a sarcasm detection project using the News Headlines Dataset. The dataset contains 28,619 headlines from TheOnion (sarcastic) and HuffPost (non-sarcastic). The implementation includes:
+
+1. **Python Training Scripts**: Three RNN architectures (SimpleRNN, LSTM, BiLSTM) for model training
+2. **Web Interface**: TensorFlow.js-powered browser application in `/gh-pages` for real-time sarcasm detection
 
 ## Core Commands
 
@@ -146,3 +149,91 @@ Based on the dataset characteristics and architecture:
 - BiLSTM: ~85-89% accuracy, slowest but best performance
 
 BiLSTM typically achieves the best F1-score and is recommended for production use.
+
+## Web Interface (gh-pages/)
+
+The `/gh-pages` directory contains a complete browser-based application for sarcasm detection using TensorFlow.js.
+
+### Structure
+```
+gh-pages/
+├── index.html              # Main web interface
+├── css/style.css          # Bootstrap + custom styles
+├── js/
+│   ├── app.js             # Main application logic & model loading
+│   ├── preprocessor.js    # Text preprocessing (mirrors Python)
+│   └── examples.js        # Example headlines
+└── models/
+    ├── config.json        # Preprocessing config (vocab_size, max_length, etc.)
+    ├── word_index.json    # Vocabulary mapping (10K words, 161 KB)
+    ├── bilstm/            # BiLSTM model (~5.3 MB)
+    ├── lstm/              # LSTM model (~5.1 MB)
+    └── simplernn/         # SimpleRNN model (~4.9 MB)
+```
+
+### Key Files
+
+**app.js**:
+- Loads all three TensorFlow.js models
+- Handles model selection and prediction
+- Manages UI updates and result display
+- Implements both single-model and comparison modes
+
+**preprocessor.js**:
+- `TextPreprocessor` class that matches Python preprocessing exactly
+- Lowercase → filter chars → tokenize → convert to indices → pad to 100
+
+**models/config.json**:
+Contains preprocessing parameters that must match training:
+```json
+{
+  "vocabSize": 10000,
+  "maxLength": 100,
+  "oovToken": "<OOV>",
+  "oovIndex": 1,
+  "paddingType": "post"
+}
+```
+
+### Deploying to GitHub Pages
+
+1. **Enable GitHub Pages**:
+   - Go to repository Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: `main` (or `master`)
+   - Folder: `/gh-pages`
+   - Save
+
+2. **Access**: Site will be available at `https://<username>.github.io/<repository-name>/`
+
+3. **Local Testing**: Simply open `gh-pages/index.html` in a browser
+
+### Model Conversion
+
+Models were converted from Keras H5 to TensorFlow.js format using:
+```python
+python export_for_web.py  # Exports tokenizer + converts to SavedModel
+python direct_tfjs_convert.py  # Converts SavedModel to TFJS format
+```
+
+The conversion process:
+1. Load Keras H5 model
+2. Export to TensorFlow SavedModel format
+3. Extract weights as binary files
+4. Generate model.json with topology and weights manifest
+
+### Preprocessing Consistency
+
+Critical: JavaScript preprocessing must match Python exactly:
+- Same filters: `!"#$%&()*+,-./:;<=>?@[\]^_`{|}~\t\n`
+- Same tokenization: lowercase + split on whitespace
+- Same OOV handling: index 1 for unknown words
+- Same padding: post-padding to length 100
+
+### Making Changes
+
+**To update models**: Retrain in Python, run conversion scripts, replace files in `gh-pages/models/`
+
+**To modify UI**: Edit `index.html` and `css/style.css` (Bootstrap 5 based)
+
+**To add features**: Extend `app.js` - all models are pre-loaded in `app.models` object
