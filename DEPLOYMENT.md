@@ -5,7 +5,7 @@ This guide explains how to deploy the sarcasm detection web interface to GitHub 
 ## Prerequisites
 
 - Git repository pushed to GitHub
-- The `gh-pages/` folder committed to the main/master branch
+- The `docs/` folder committed to the main/master branch
 - Repository Settings access
 
 ## Step-by-Step Deployment
@@ -28,7 +28,7 @@ git push origin main  # or 'master' depending on your default branch
 3. In the left sidebar, click **Pages**
 4. Under **Source**, select:
    - **Branch**: `main` (or `master`)
-   - **Folder**: `/gh-pages`
+   - **Folder**: `/docs`
 5. Click **Save**
 
 ### 3. Wait for Deployment
@@ -70,8 +70,8 @@ Add the live link to your README.md:
 **Problem**: 404 error or blank page
 
 **Solutions**:
-1. Check that `/gh-pages` folder is selected (not root `/`)
-2. Ensure `index.html` exists in `gh-pages/` folder
+1. Check that `/docs` folder is selected (not root `/`)
+2. Ensure `index.html` exists in `docs/` folder
 3. Wait 5-10 minutes for DNS propagation
 4. Try clearing browser cache or using incognito mode
 
@@ -81,10 +81,11 @@ Add the live link to your README.md:
 
 **Solutions**:
 1. Check browser console (F12) for specific error messages
-2. Ensure model files are in `gh-pages/models/*/` directories
+2. Ensure model files are in `docs/models/*/` directories
 3. Verify file paths in `app.js` match actual structure
 4. Check that binary `.bin` files were committed (not in `.gitignore`)
-5. GitHub Pages has a 100 MB file size limit - our models (~5 MB each) are fine
+5. Check that `.nojekyll` file exists in `docs/` to prevent Jekyll processing
+6. GitHub Pages has a 100 MB file size limit - our models (~5 MB each) are fine
 
 ### CORS Errors
 
@@ -99,7 +100,7 @@ Add the live link to your README.md:
 Before deploying, test locally:
 
 ```bash
-cd gh-pages
+cd docs
 python3 -m http.server 8000
 # or
 npx http-server -p 8000
@@ -113,7 +114,7 @@ Then open: `http://localhost:8000`
 
 To use a custom domain:
 
-1. Create a file named `CNAME` in `gh-pages/` folder
+1. Create a file named `CNAME` in `docs/` folder
 2. Add your domain: `sarcasm.yourdomain.com`
 3. Configure DNS with your domain registrar:
    - Add CNAME record pointing to `<username>.github.io`
@@ -123,10 +124,10 @@ To use a custom domain:
 
 To update the deployed site:
 
-1. Make changes to files in `gh-pages/`
+1. Make changes to files in `docs/`
 2. Commit and push:
    ```bash
-   git add gh-pages/
+   git add docs/
    git commit -m "Update web interface"
    git push origin main
    ```
@@ -174,4 +175,4 @@ After deployment:
 
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
 - [TensorFlow.js Documentation](https://www.tensorflow.org/js)
-- [This Repository's gh-pages README](./gh-pages/README.md)
+- [This Repository's docs README](./docs/README.md)

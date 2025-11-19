@@ -150,13 +150,13 @@ Based on the dataset characteristics and architecture:
 
 BiLSTM typically achieves the best F1-score and is recommended for production use.
 
-## Web Interface (gh-pages/)
+## Web Interface (docs/)
 
-The `/gh-pages` directory contains a complete browser-based application for sarcasm detection using TensorFlow.js.
+The `/docs` directory contains a complete browser-based application for sarcasm detection using TensorFlow.js.
 
 ### Structure
 ```
-gh-pages/
+docs/
 ├── index.html              # Main web interface
 ├── css/style.css          # Bootstrap + custom styles
 ├── js/
@@ -201,12 +201,12 @@ Contains preprocessing parameters that must match training:
    - Go to repository Settings → Pages
    - Source: Deploy from a branch
    - Branch: `main` (or `master`)
-   - Folder: `/gh-pages`
+   - Folder: `/docs`
    - Save
 
 2. **Access**: Site will be available at `https://<username>.github.io/<repository-name>/`
 
-3. **Local Testing**: Simply open `gh-pages/index.html` in a browser
+3. **Local Testing**: Simply open `docs/index.html` in a browser
 
 ### Model Conversion
 
@@ -232,7 +232,7 @@ Critical: JavaScript preprocessing must match Python exactly:
 
 ### Making Changes
 
-**To update models**: Retrain in Python, run conversion scripts, replace files in `gh-pages/models/`
+**To update models**: Retrain in Python, run conversion scripts, replace files in `docs/models/`
 
 **To modify UI**: Edit `index.html` and `css/style.css` (Bootstrap 5 based)
 

@@ -2,7 +2,7 @@
 
 ## 🌐 Live Demo
 
-**Try the web interface:** Open `gh-pages/index.html` in your browser or [view on GitHub Pages](#) (configure in Settings → Pages)
+**Try the web interface:** Open `docs/index.html` in your browser or [view on GitHub Pages](#) (configure in Settings → Pages → Source: main branch `/docs` folder)
 
 The web interface features:
 - 🤖 Three RNN models (SimpleRNN, LSTM, BiLSTM) running in your browser

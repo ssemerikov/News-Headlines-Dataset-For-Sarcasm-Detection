@@ -33,5 +33,5 @@ manual_tfjs_converter.py
 *.jpg
 *.jpeg
 
-# Keep gh-pages assets
-!gh-pages/**
+# Keep docs assets
+!docs/**
