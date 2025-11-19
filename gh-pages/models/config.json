@@ -1,0 +1,11 @@
+{
+  "vocabSize": 10000,
+  "maxLength": 100,
+  "embeddingDim": 128,
+  "paddingType": "post",
+  "truncationType": "post",
+  "oovToken": "<OOV>",
+  "oovIndex": 1,
+  "filters": "!\"#$%&()*+,-./:;<=>?@[\\\\]^_`{|}~\\t\\n",
+  "lowercase": true
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarcasm Detection - News Headlines</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.15.0/dist/tf.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="py-5 text-center">
+            <h1 class="display-4 fw-bold">
+                <i class="bi bi-newspaper"></i> Sarcasm Detection
+            </h1>
+            <p class="lead text-muted">
+                Detect sarcasm in news headlines using RNN models
+            </p>
+            <p class="text-muted">
+                <small>Powered by TensorFlow.js | Dataset: TheOnion + HuffPost</small>
+            </p>
+        </header>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen" class="text-center my-5">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <h4 class="mt-3">Loading Models...</h4>
+            <p id="loadingStatus" class="text-muted">Initializing...</p>
+            <div class="progress mx-auto" style="max-width: 400px;">
+                <div id="loadingProgress" class="progress-bar progress-bar-striped progress-bar-animated"
+                     role="progressbar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Main App (hidden until loaded) -->
+        <div id="mainApp" style="display: none;">
+            <!-- Model Selector -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-cpu"></i> Select Model
+                    </h5>
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="modelSelect" id="modelSimpleRNN" value="simplernn">
+                        <label class="btn btn-outline-primary" for="modelSimpleRNN">
+                            SimpleRNN
+                            <small class="d-block text-muted">Fast</small>
+                        </label>
+
+                        <input type="radio" class="btn-check" name="modelSelect" id="modelLSTM" value="lstm">
+                        <label class="btn btn-outline-primary" for="modelLSTM">
+                            LSTM
+                            <small class="d-block text-muted">Better</small>
+                        </label>
+
+                        <input type="radio" class="btn-check" name="modelSelect" id="modelBiLSTM" value="bilstm" checked>
+                        <label class="btn btn-outline-primary" for="modelBiLSTM">
+                            BiLSTM
+                            <small class="d-block text-muted">Best</small>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Section -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-pencil-square"></i> Enter Headline
+                    </h5>
+                    <textarea id="headlineInput" class="form-control mb-3" rows="3"
+                              placeholder="Enter a news headline to analyze..."></textarea>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button id="analyzeBtn" class="btn btn-primary btn-lg">
+                            <i class="bi bi-search"></i> Analyze
+                        </button>
+                        <button id="compareBtn" class="btn btn-outline-secondary">
+                            <i class="bi bi-bar-chart"></i> Compare All Models
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example Headlines -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-lightbulb"></i> Example Headlines
+                    </h5>
+                    <div id="examplesContainer" class="row g-2">
+                        <!-- Examples loaded from examples.js -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" style="display: none;">
+                <!-- Single Model Result -->
+                <div id="singleResult" class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-graph-up"></i> Prediction Result
+                        </h5>
+                        <div id="resultContent"></div>
+                    </div>
+                </div>
+
+                <!-- Model Comparison -->
+                <div id="comparisonResult" class="card mb-4" style="display: none;">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-bar-chart-line"></i> Model Comparison
+                        </h5>
+                        <div id="comparisonContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-info-circle"></i> About
+                    </h5>
+                    <p>
+                        This web application uses machine learning models trained on a dataset of 28,619 news headlines
+                        from TheOnion (sarcastic) and HuffPost (non-sarcastic). Three different RNN architectures are
+                        available for comparison:
+                    </p>
+                    <ul>
+                        <li><strong>SimpleRNN:</strong> Basic recurrent neural network (fastest, baseline performance)</li>
+                        <li><strong>LSTM:</strong> Long Short-Term Memory network (better at long-term dependencies)</li>
+                        <li><strong>BiLSTM:</strong> Bidirectional LSTM (best performance, processes text in both directions)</li>
+                    </ul>
+                    <p class="mb-0">
+                        <small class="text-muted">
+                            All processing happens in your browser. Your data never leaves your device.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-muted py-4">
+            <p>
+                <small>
+                    Dataset: <a href="https://github.com/rishabhmisra/News-Headlines-Dataset-For-Sarcasm-Detection" target="_blank">News Headlines Dataset for Sarcasm Detection</a>
+                    | Built with TensorFlow.js
+                </small>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/examples.js"></script>
+    <script src="js/preprocessor.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

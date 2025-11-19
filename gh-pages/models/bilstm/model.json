@@ -1,0 +1,147 @@
+{
+  "format": "graph-model",
+  "generatedBy": "TensorFlow.js tfjs-converter v1.0.0",
+  "convertedBy": "Custom SavedModel converter",
+  "modelTopology": {
+    "node": [],
+    "library": {},
+    "versions": {}
+  },
+  "weightsManifest": [
+    {
+      "paths": [
+        "group1-shard1of1.bin"
+      ],
+      "weights": [
+        {
+          "name": "BiLSTM_Model/embedding_2/embeddings:0",
+          "shape": [
+            10000,
+            128
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "forward_lstm_1/lstm_cell/kernel:0",
+          "shape": [
+            128,
+            256
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "forward_lstm_1/lstm_cell/recurrent_kernel:0",
+          "shape": [
+            64,
+            256
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "forward_lstm_1/lstm_cell/bias:0",
+          "shape": [
+            256
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "backward_lstm_1/lstm_cell/kernel:0",
+          "shape": [
+            128,
+            256
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "backward_lstm_1/lstm_cell/recurrent_kernel:0",
+          "shape": [
+            64,
+            256
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "backward_lstm_1/lstm_cell/bias:0",
+          "shape": [
+            256
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "BiLSTM_Model/dense_4/kernel:0",
+          "shape": [
+            128,
+            64
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "BiLSTM_Model/dense_4/bias:0",
+          "shape": [
+            64
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "BiLSTM_Model/dense_5/kernel:0",
+          "shape": [
+            64,
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "BiLSTM_Model/dense_5/bias:0",
+          "shape": [
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "seed_generator_2/seed_generator_state:0",
+          "shape": [
+            2
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "seed_generator_1/seed_generator_state:0",
+          "shape": [
+            2
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "seed_generator_3/seed_generator_state:0",
+          "shape": [
+            2
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "seed_generator_4/seed_generator_state:0",
+          "shape": [
+            2
+          ],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ],
+  "signature": {
+    "inputs": {
+      "input": {
+        "name": "input_layer_2",
+        "dtype": "<dtype: 'float32'>",
+        "tensorShape": {
+          "dim": [
+            {
+              "size": "100"
+            }
+          ]
+        }
+      }
+    },
+    "outputs": {}
+  }
+}

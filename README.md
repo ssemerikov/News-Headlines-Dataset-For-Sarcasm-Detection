@@ -1,5 +1,18 @@
 # News-Headlines-Dataset-For-Sarcasm-Detection
 
+## 🌐 Live Demo
+
+**Try the web interface:** Open `gh-pages/index.html` in your browser or [view on GitHub Pages](#) (configure in Settings → Pages)
+
+The web interface features:
+- 🤖 Three RNN models (SimpleRNN, LSTM, BiLSTM) running in your browser
+- 📊 Real-time sarcasm detection with confidence visualization
+- 🔄 Model comparison mode
+- 📱 Mobile-responsive design
+- 🔒 Privacy-first - all processing happens client-side
+
+---
+
 Past studies in Sarcasm Detection mostly make use of Twitter datasets collected using hashtag based supervision but such datasets are noisy in terms of labels and language. Furthermore, many tweets are replies to other tweets and detecting sarcasm in these requires the availability of contextual tweets.
 
 To overcome the limitations related to noise in Twitter datasets, this **Headlines dataset for Sarcasm Detection** is collected from two news website. [*TheOnion*](https://www.theonion.com/) aims at producing sarcastic versions of current events and we collected all the headlines from News in Brief and News in Photos categories (which are sarcastic). We collect real (and non-sarcastic) news headlines from [*HuffPost*](https://www.huffingtonpost.com/).

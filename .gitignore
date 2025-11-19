@@ -16,12 +16,22 @@ ENV/
 *.swp
 *.swo
 
-# Model outputs
+# Model outputs (Python training)
 *.h5
 *.keras
 checkpoints/
 
-# Data and plots
+# Temporary conversion files
+saved_models/
+convert_*.py
+direct_tfjs_convert.py
+export_for_web.py
+manual_tfjs_converter.py
+
+# Data and plots (not in gh-pages)
 *.png
 *.jpg
 *.jpeg
+
+# Keep gh-pages assets
+!gh-pages/**

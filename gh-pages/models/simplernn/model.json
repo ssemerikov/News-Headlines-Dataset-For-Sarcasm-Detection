@@ -1,0 +1,117 @@
+{
+  "format": "graph-model",
+  "generatedBy": "TensorFlow.js tfjs-converter v1.0.0",
+  "convertedBy": "Custom SavedModel converter",
+  "modelTopology": {
+    "node": [],
+    "library": {},
+    "versions": {}
+  },
+  "weightsManifest": [
+    {
+      "paths": [
+        "group1-shard1of1.bin"
+      ],
+      "weights": [
+        {
+          "name": "SimpleRNN_Model/embedding/embeddings:0",
+          "shape": [
+            10000,
+            128
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "SimpleRNN_Model/simple_rnn/simple_rnn_cell/kernel:0",
+          "shape": [
+            128,
+            64
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "SimpleRNN_Model/simple_rnn/simple_rnn_cell/recurrent_kernel:0",
+          "shape": [
+            64,
+            64
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "SimpleRNN_Model/simple_rnn/simple_rnn_cell/bias:0",
+          "shape": [
+            64
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "SimpleRNN_Model/dense/kernel:0",
+          "shape": [
+            64,
+            64
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "SimpleRNN_Model/dense/bias:0",
+          "shape": [
+            64
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "SimpleRNN_Model/dense_1/kernel:0",
+          "shape": [
+            64,
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "SimpleRNN_Model/dense_1/bias:0",
+          "shape": [
+            1
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "seed_generator_8/seed_generator_state:0",
+          "shape": [
+            2
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "seed_generator_9/seed_generator_state:0",
+          "shape": [
+            2
+          ],
+          "dtype": "float32"
+        },
+        {
+          "name": "seed_generator_10/seed_generator_state:0",
+          "shape": [
+            2
+          ],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ],
+  "signature": {
+    "inputs": {
+      "input": {
+        "name": "input_layer",
+        "dtype": "<dtype: 'float32'>",
+        "tensorShape": {
+          "dim": [
+            {
+              "size": "100"
+            }
+          ]
+        }
+      }
+    },
+    "outputs": {}
+  }
+}
